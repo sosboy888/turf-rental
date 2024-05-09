@@ -17,12 +17,15 @@ logger.error("Dummy Error")
 logger.debug("Dummy Debug")
 logger.warning("Dummy Warning")
 
+"""
 app = FastAPI(dependencies=[Depends(get_query_token)])
+"""
+app = FastAPI()
 
 app.include_router(users.router)
 
 @app.get("/")
-async def root():
+def root():
     return {"message": "Turf Central!"}
 
 
