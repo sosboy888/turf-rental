@@ -1,12 +1,13 @@
+import asyncpg
 class Database:
-    def __init__(self,user,password,host,database,port="5432"):
+    def __init__(self,user,password,host,database,logger,port="5432"):
         self.user = user
         self.password = password
         self.host = host
         self.port = port
         self.database = database
         self._cursor = None
-
+        self.logger = logger
         self._connection_pool = None
         
     async def connect(self):
@@ -20,13 +21,12 @@ class Database:
                     port=self.port,
                     user=self.user,
                     password=self.password,
-                    database=self.database,
-                    ssl="require"
+                    database=self.database
                 )
-                logger.info("Database pool connectionn opened")
+                self.logger.info("Database pool connectionn opened")
 
             except Exception as e:
-                logger.exception(e)
+                self.logger.exception(e)
 
     async def fetch_rows(self, query: str,*args):
         if not self._connection_pool:
@@ -37,7 +37,7 @@ class Database:
                 result = await con.fetch(query,*args)
                 return result
             except Exception as e:
-                logger.exception(e)
+                self.logger.exception(e)
             finally:
                 await self._connection_pool.release(con)
 
@@ -45,6 +45,6 @@ class Database:
         if not self._connection_pool:
             try:
                 await self._connection_pool.close()
-                logger.info("Database pool connection closed")
+                self.logger.info("Database pool connection closed")
             except Exception as e:
-                logger.exception(e)
+                self.logger.exception(e)
