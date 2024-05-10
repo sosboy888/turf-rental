@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI
 
 from dependencies import get_query_token, get_token_header
-from routers import users
+from routers import users, turfs
 from db import database as db
 from dotenv import dotenv_values
 from logging.config import dictConfig
@@ -23,6 +23,7 @@ app = FastAPI(dependencies=[Depends(get_query_token)])
 app = FastAPI()
 
 app.include_router(users.router)
+app.include_router(turfs.router)
 
 @app.get("/")
 def root():

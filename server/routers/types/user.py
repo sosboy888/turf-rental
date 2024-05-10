@@ -13,7 +13,6 @@ profile_pic_url - TEXT
 """
 
 class User(BaseModel):
-    uuid: str
     username: str
     password_hash: str
     dob: date
