@@ -20,6 +20,10 @@ SET name = $1, address = $2, phone = $3, email = $4, start_time = $5, end_time =
 WHERE uuid = $16 
 """
 
+get_query = """
+SELECT * from public.turf WHERE uuid = $1
+"""
+
 @router.post("/turfs/", tags=["turfs"])
 async def write_turf(turf: turf.Turf, request: Request):
     turf_uuid = uuid.uuid4()
@@ -54,7 +58,7 @@ async def delete_turf(turf_uuid:str, request: Request):
     return {"message":"delete successful"}
 
 @router.put("/turfs/{turf_uuid}/update/", tags=["turfs"])
-async def update_turf(turf_uuid: int, turf: turf.Turf, request: Request):
+async def update_turf(turf_uuid:str, turf: turf.Turf, request: Request):
     result = await request.app.state.db.update_row(
         update_query,
         turf.name,
@@ -75,4 +79,14 @@ async def update_turf(turf_uuid: int, turf: turf.Turf, request: Request):
         turf_uuid 
     )
     return {"message":"update successful"}
+    
+
+@router.get("/turfs/{turf_uuid}/")
+async def get_turf(turf_uuid: str, request: Request):
+    result = await request.app.state.db.fetch_row(
+        get_query,
+        turf_uuid
+    )
+    result = dict(result)
+    return result
     

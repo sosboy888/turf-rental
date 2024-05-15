@@ -42,6 +42,20 @@ class Database:
                 await self._connection_pool.release(con)
 
 
+    async def fetch_row(self, query: str,*args):
+        if not self._connection_pool:
+            await self.connect()
+        else:
+            con = await self._connection_pool.acquire()
+            try:
+                result = await con.fetchone(query,*args)
+                return result
+            except Exception as e:
+                self.logger.exception(e)
+            finally:
+                await self._connection_pool.release(con)
+
+
     async def save_row(self, query: str, *args):
         if not self._connection_pool:
             await self.connect()
