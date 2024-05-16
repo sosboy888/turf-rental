@@ -48,7 +48,8 @@ class Database:
         else:
             con = await self._connection_pool.acquire()
             try:
-                result = await con.fetchone(query,*args)
+                result = await con.fetchrow(query,*args)
+                self.logger.info(result)
                 return result
             except Exception as e:
                 self.logger.exception(e)

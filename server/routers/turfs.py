@@ -17,11 +17,11 @@ DELETE FROM public.turf where uuid = $1;
 update_query = """
 UPDATE public.turf
 SET name = $1, address = $2, phone = $3, email = $4, start_time = $5, end_time = $6, days_available = $7, price_per_hr = $8, currency = $9, max_people = $10, turf_length = $11, turf_width = $12, grass = $13, advance_days = $14, advance_end_in_mins = $15
-WHERE uuid = $16 
+WHERE uuid = $16;
 """
 
 get_query = """
-SELECT * from public.turf WHERE uuid = $1
+SELECT * from public.turf WHERE uuid = $1;
 """
 
 @router.post("/turfs/", tags=["turfs"])
