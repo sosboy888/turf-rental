@@ -89,4 +89,3 @@ async def get_turf(turf_uuid: str, request: Request):
     )
     result = dict(result)
     return result
-    
