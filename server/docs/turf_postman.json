@@ -1,0 +1,120 @@
+{
+    "info": {
+        "_postman_id": "6bfe1744-4e5d-4c17-b6b9-0cb7d61163d1",
+        "name": "turfs",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "http://127.0.0.1:8000/turfs",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/turfs",
+                    "path": [
+                        "turfs"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"user_uuid\": \"f6f33e80-d63a-4490-bac4-c096a85eaf6c\",\n  \"name\": \"Example Turf\",\n  \"address\": \"123 Example St, City, Country\",\n  \"phone\": \"123-456-7890\",\n  \"email\": \"example@example.com\",\n  \"start_time\": \"09:00:00\",\n  \"end_time\": \"17:00:00\",\n  \"days_available\": \"WEEKDAYS\",\n  \"price_per_hr\": 50,\n  \"currency\": \"$\",\n  \"max_people\": 20,\n  \"turf_length\": 50,\n  \"turf_width\": 30,\n  \"grass\": true,\n  \"advance_days\": 7,\n  \"advance_end_in_mins\": 30\n}"
+                }
+            }
+        },
+        {
+            "name": "http://127.0.0.1:8000/turfs",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/turfs",
+                    "path": [
+                        "turfs"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"user_uuid\": \"f6f33e80-d63a-4490-bac4-c096a85eaf6c\",\n  \"name\": \"Example Turf\",\n  \"address\": \"123 Example St, City, Country\",\n  \"phone\": \"123-456-7890\",\n  \"email\": \"example@example.com\",\n  \"start_time\": \"09:00:00\",\n  \"end_time\": \"17:00:00\",\n  \"days_available\": \"WEEKDAYS\",\n  \"price_per_hr\": 50,\n  \"currency\": \"$\",\n  \"max_people\": 20,\n  \"turf_length\": 50,\n  \"turf_width\": 30,\n  \"grass\": true,\n  \"advance_days\": 7,\n  \"advance_end_in_mins\": 30\n}"
+                }
+            }
+        },
+        {
+            "name": "Update turf",
+            "request": {
+                "method": "PUT",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/turfs/6412bf34-6139-4a96-8b6b-6960c22026d5/update",
+                    "path": [
+                        "turfs",
+                        "6412bf34-6139-4a96-8b6b-6960c22026d5",
+                        "update"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"user_uuid\": \"f6f33e80-d63a-4490-bac4-c096a85eaf6c\",\n  \"name\": \"Example Turf2\",\n  \"address\": \"123 Example St, City, Country\",\n  \"phone\": \"123-456-7890\",\n  \"email\": \"example@example.com\",\n  \"start_time\": \"09:00:00\",\n  \"end_time\": \"17:00:00\",\n  \"days_available\": \"WEEKDAYS\",\n  \"price_per_hr\": 50,\n  \"currency\": \"$\",\n  \"max_people\": 20,\n  \"turf_length\": 50,\n  \"turf_width\": 30,\n  \"grass\": true,\n  \"advance_days\": 7,\n  \"advance_end_in_mins\": 30\n}"
+                }
+            }
+        },
+        {
+            "name": "Get Turf by id",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/turfs/6412bf34-6139-4a96-8b6b-6960c22026d5/",
+                    "path": [
+                        "turfs",
+                        "6412bf34-6139-4a96-8b6b-6960c22026d5"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                }
+            }
+        }
+    ]
+}

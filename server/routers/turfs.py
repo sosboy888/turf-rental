@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 from .types import turf
 import uuid
-from fastapi import Request
+from fastapi import Request, Depends
+from dependencies import get_current_user
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ SELECT * from public.turf WHERE uuid = $1;
 """
 
 @router.post("/turfs/", tags=["turfs"])
-async def write_turf(turf: turf.Turf, request: Request):
+async def write_turf(turf: turf.Turf, request: Request, current_user : dict = Depends(get_current_user)):
     turf_uuid = uuid.uuid4()
     result = await request.app.state.db.save_row(
         insert_query,
@@ -50,7 +51,7 @@ async def write_turf(turf: turf.Turf, request: Request):
     return {"message":"create successful"}
 
 @router.get("/turfs/{turf_uuid}/delete/", tags=["turfs"])
-async def delete_turf(turf_uuid:str, request: Request):
+async def delete_turf(turf_uuid:str, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.delete_row(
         delete_query,
         turf_uuid
@@ -58,7 +59,7 @@ async def delete_turf(turf_uuid:str, request: Request):
     return {"message":"delete successful"}
 
 @router.put("/turfs/{turf_uuid}/update/", tags=["turfs"])
-async def update_turf(turf_uuid:str, turf: turf.Turf, request: Request):
+async def update_turf(turf_uuid:str, turf: turf.Turf, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.update_row(
         update_query,
         turf.name,
@@ -82,7 +83,7 @@ async def update_turf(turf_uuid:str, turf: turf.Turf, request: Request):
     
 
 @router.get("/turfs/{turf_uuid}/")
-async def get_turf(turf_uuid: str, request: Request):
+async def get_turf(turf_uuid: str, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.fetch_row(
         get_query,
         turf_uuid

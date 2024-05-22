@@ -1,0 +1,60 @@
+{
+    "info": {
+        "_postman_id": "16b43bec-390c-4078-bc1b-09d2ada7df54",
+        "name": "Users",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "User Registration",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/users",
+                    "path": [
+                        "users"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"username\":\"sosboy888\",\n  \"password_hash\":\"verystrongpassword\",\n  \"dob\":\"2012-04-23\",\n  \"email\":\"veryniceemail@gmail.com\",\n  \"phone\":\"6969696969\",\n  \"category\":\"ADMIN\",\n  \"description\":\"very nice description\",\n  \"profile_pic_url\":\"okoko\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Fetch user by uuid",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/users/f6f33e80-d63a-4490-bac4-c096a85eaf6c/",
+                    "path": [
+                        "users",
+                        "f6f33e80-d63a-4490-bac4-c096a85eaf6c"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                }
+            }
+        }
+    ]
+}

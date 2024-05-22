@@ -16,7 +16,7 @@ SELECT * FROM public."user" WHERE uuid=$1;
 """
 
 @router.get("/users/{user_uuid}/", tags=["users"])
-async def read_user(user_uuid: str, request: Request):
+async def read_user(user_uuid: str, request: Request, current_user: dict = Depends(get_current_user)):
     result = await request.app.state.db.fetch_row(
         fetchone_query,
         user_uuid
@@ -25,7 +25,7 @@ async def read_user(user_uuid: str, request: Request):
 
 
 @router.post("/users/", tags=["users"])
-async def write_user(user: user.User, request: Request, current_user: dict = Depends(get_current_user)):
+async def write_user(user: user.User, request: Request):
     #TODO create user using generated hash_key
     user_uuid = uuid.uuid4()
     result = await request.app.state.db.save_row(

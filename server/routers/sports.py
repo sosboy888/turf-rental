@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 from .types import sport
 import uuid
-from fastapi import Request
+from fastapi import Request, Depends
+from dependencies import get_current_user
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ SELECT * from public.sports where turf_uuid = $1;
 
 
 @router.post("/sports/", tags=["sports"])
-async def write(sport: sport.Sport, request: Request):
+async def write(sport: sport.Sport, request: Request, current_user : dict = Depends(get_current_user)):
     sport_uuid = uuid.uuid4()
     result = await request.app.state.db.save_row(
         insert_query,
@@ -35,7 +36,7 @@ async def write(sport: sport.Sport, request: Request):
     return {"message":"create successful"}
 
 @router.put("/sports/{sport_uuid}/update/", tags=["sports"])
-async def update_sport(sport_uuid:str, sport: sport.Sport, request: Request):
+async def update_sport(sport_uuid:str, sport: sport.Sport, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.update_row(
         update_query,
         sport.name,
@@ -45,7 +46,7 @@ async def update_sport(sport_uuid:str, sport: sport.Sport, request: Request):
     return {"message":"update successful"}
 
 @router.post("/sports/{sport_uuid}/delete/", tags=["sports"])
-async def delete_turf(sport_uuid:str, sport: sport.Sport, request: Request):
+async def delete_turf(sport_uuid:str, sport: sport.Sport, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.delete_row(
         delete_query,
         sport_uuid,
@@ -54,7 +55,7 @@ async def delete_turf(sport_uuid:str, sport: sport.Sport, request: Request):
     return {"message":"delete successful"}
 
 @router.get("/sports/{turf_uuid}/", tags=["sports"])
-async def get_sport_by_turf(turf_uuid: str, request: Request):
+async def get_sport_by_turf(turf_uuid: str, request: Request, current_user : dict = Depends(get_current_user)):
     result = await request.app.state.db.fetch_rows(
         fetch_query,
         turf_uuid
