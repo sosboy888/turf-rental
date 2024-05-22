@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 from .types import user
+from dependencies import get_current_user
 import uuid
-from fastapi import Request
+from fastapi import Request, Depends
+
 router = APIRouter()
 
 insert_query = """
@@ -23,7 +25,7 @@ async def read_user(user_uuid: str, request: Request):
 
 
 @router.post("/users/", tags=["users"])
-async def write_user(user: user.User, request: Request):
+async def write_user(user: user.User, request: Request, current_user: dict = Depends(get_current_user)):
     #TODO create user using generated hash_key
     user_uuid = uuid.uuid4()
     result = await request.app.state.db.save_row(
